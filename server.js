@@ -12,6 +12,10 @@ app.use(express.json());
 
 // CRUD routes
 
+app.get('/', (req, res) => {
+    res.json({ message: 'Hello, World!' });
+});
+
 // Create
 app.post('/notes', (req, res) => {
     const { note } = req.body;
