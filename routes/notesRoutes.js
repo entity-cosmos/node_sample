@@ -1,10 +1,10 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import Notes from '../models/notes.js';
+const Notes = require('../models/notes.js');
 
-//create notes
-router.post("/create", async(req, res) => {
-  try{
+// Create notes
+router.post("/create", async (req, res) => {
+  try {
     const date = new Date();
     const note = new Notes({
       title: req.body.title,
@@ -14,46 +14,42 @@ router.post("/create", async(req, res) => {
     console.log(note);
     const savedNote = await note.save();
     res.json(savedNote);
-  }
-  catch(err){
-    res.status(500).json({message: err.message});
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
-//update notes
-router.patch("/update/:id", async(req, res) => {
-  try{
+// Update notes
+router.patch("/update/:id", async (req, res) => {
+  try {
     const updatedNote = await Notes.updateOne(
-      {_id: req.params.id},
-      {$set: {title: req.body.title, content: req.body.content}}
+      { _id: req.params.id },
+      { $set: { title: req.body.title, content: req.body.content } }
     );
     res.json(updatedNote);
-  }
-  catch(err){
-    res.status(500).json({message: err.message});
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
-//delete notes
-router.delete("/delete/:id", async(req, res) => {
-  try{
-    const deletedNote = await Notes.deleteOne({_id: req.params.id});
+// Delete notes
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const deletedNote = await Notes.deleteOne({ _id: req.params.id });
     res.json(deletedNote);
-  }
-  catch(err){
-    res.status(500).json({message: err.message});
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
-//list notes
-router.get("/list", async(req, res) => {
-    try{
-        const notes = await Notes.find();
-        res.json(notes);
-    }
-    catch(err){
-        res.status(500).json({message: err.message});
-    }
+// List notes
+router.get("/list", async (req, res) => {
+  try {
+    const notes = await Notes.find();
+    res.json(notes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
-export default router;
+module.exports = router;
