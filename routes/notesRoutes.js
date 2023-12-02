@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import Notes from '../models/notes.mjs';
+import Notes from '../models/notes.js';
 
 //create notes
 router.post("/create", async(req, res) => {

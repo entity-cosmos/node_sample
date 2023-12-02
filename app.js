@@ -3,7 +3,7 @@ import morgan from "morgan";
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bodyParser from "body-parser";
-import notesRoutes from "./routes/notesRoutes.mjs";
+import notesRoutes from "./routes/notesRoutes.js";
 
 const app = express();
 app.use(morgan("dev"));
